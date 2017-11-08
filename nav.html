@@ -196,8 +196,6 @@
   document.addEventListener("keyup", function(e) {
     href = webLink[e.key] || "";
     if (!href || !e.ctrlKey) return;
-    console.log(e.ctrlKey)
-    console.log(href);
     open("http://www." + href, "_blank");
   })
   </script>
