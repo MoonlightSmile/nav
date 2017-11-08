@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 
 <head>
   <meta charset="UTF-8">
@@ -55,6 +55,7 @@
     border-radius: 5px;
     height: 32px;
     width: 200px;
+    color: #fff;
   }
 
   header .search {
@@ -162,12 +163,12 @@
     <ul class="clearfix">
       <a class="logo" href="#">Moonlight</a>
       <div class="wrap-search">
-        <input type="search" name="">
-        <span class="search">百度一下</span><span class="search">谷歌一下</span>
+        <input type="search" class="arguments">
+        <span class="search baidu">百度一下</span><span class="search google">谷歌一下</span>
       </div>
     </ul>
   </header>
-  <main id="a">
+  <main>
     <div class="wrap">
     </div>
   </main>
@@ -272,6 +273,20 @@
     if (!href || !e.ctrlKey) return;
     open("http://www." + href, "_blank");
   })
+
+
+  //搜索功能
+  var btns = document.querySelectorAll(".search");
+  console.log(btns);
+  btns[0].addEventListener("click", function(){
+    var arguments = document.querySelector(".arguments");
+    open("http://www.baidu.com/s?wd="+arguments.value, "_blank");
+  })
+  btns[1].addEventListener("click", function(){
+    var arguments = document.querySelector(".arguments");
+    open("http://www.google.com/search?q="+arguments.value, "_blank")
+  })
+
   </script>
 </body>
 
