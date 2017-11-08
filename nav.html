@@ -105,7 +105,7 @@
     ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
     ["z", "x", "c", "v", "b", "n", "m"]
   ]
-  var hash = { 'q': 'qq.com', 'w': 'weibo.com', 'e': 'ele.me', 'r': 'renren.com', 't': 'tianya.com', 'y': 'youtube.com', 'u': 'uc.com', 'i': 'iqiyi.com', 'o': 'opera.com', 'p': undefined, 'a': 'acfun.tv', 's': 'sohu.com', 'z': 'zhihu.com', 'm': 'www.mcdonalds.com.cn', "j": "jingdong.com" }
+  var hash = { 'q': 'qq.com', 'w': 'weibo.com', 'e': 'ele.me', 'r': 'renren.com', 't': 'tianya.com', 'y': 'youtube.com', 'u': 'uc.com', 'i': 'iqiyi.com', 'o': 'opera.com', 'p': "", 'a': 'acfun.tv', 's': 'sohu.com', 'z': 'zhihu.com', 'm': 'www.mcdonalds.com.cn', "j": "jingdong.com" }
   var webLink = {
     a: "acfun.cn",
     b: "acfun.com",
@@ -140,7 +140,7 @@
       edit.index = key[i][j];
       del.setAttribute("class", "btn del");
       del.textContent = "D";
-      del.inde = key[i][j];
+      del.index = key[i][j];
       img.setAttribute("src", icoSrc)
       kbd.textContent = key[i][j];
       kbd.index = key[i][j];
@@ -158,8 +158,8 @@
       })
       del.addEventListener("click", function(e) {
         hash[this.index] = "";
-        this.parentNode.querySelector("img").src = ""
-        e.stopPropagation()
+        this.parentNode.querySelector("img").src = "";
+        e.stopPropagation();
       })
 
       kbd.addEventListener("click", function(e) {
