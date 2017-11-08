@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="shortcut icon" href="panda.ico" />
   <title>nav</title>
   <style type="text/css">
   .wrap {
@@ -109,7 +110,7 @@
     a: "acfun.cn",
     b: "baidu.com",
     c: "",
-    d: "",
+    d: "douban.com",
     e: "",
     f: "",
     g: "google.com",
@@ -148,7 +149,10 @@
       var img = document.createElement("img");
       var edit = document.createElement("span");
       var del = document.createElement("span");
-      var icoSrc = "http://www." + webLink[key[i][j]] + "/favicon.ico";
+      var icoSrc = "";
+      if(webLink[key[i][j]]){
+        icoSrc = "http://www." + webLink[key[i][j]] + "/favicon.ico";
+      }
       edit.setAttribute("class", "btn edit");
       edit.textContent = "E";
       edit.index = key[i][j];
@@ -159,7 +163,6 @@
       kbd.textContent = key[i][j];
       kbd.index = key[i][j];
       edit.addEventListener("click", function(e) {
-        console.log(this.index)
         swal("请给我一个链接", {
             content: "input",
           })
