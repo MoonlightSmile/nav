@@ -8,8 +8,74 @@
   <link rel="shortcut icon" href="panda.ico" />
   <title>nav</title>
   <style type="text/css">
+  * {
+    padding: 0;
+    margin: 0;
+  }
+
+  .clearfix::after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+
+  header {
+    text-align: center;
+    padding: 29px 40px;
+    background: rgba(0, 0, 0,0.9);
+    box-shadow: 0 2px 9px 3px rgba(0, 0, 0, 0.3);
+  }
+
+  header .wrap-search {
+    float: right;
+    margin-right: 150px;
+  }
+
+  header a {
+    margin-left: 60px;
+    text-decoration: none;
+    color: #fff;
+    float: left;
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+
+  header ul input,
+  header ul span {
+    float: left;
+    margin-right: 15px;
+  }
+
+  header input {
+    display: inline-block;
+    background: #555555;
+    border: none;
+    padding: 11px;
+    border-radius: 5px;
+    height: 32px;
+    width: 200px;
+  }
+
+  header .search {
+    color: #fff;
+    background: #555555;
+    display: inline-block;
+    border-radius: 5px;
+    padding: 7.5px;
+    cursor: pointer;
+    font-size: 12px;
+  }
+
+  main {
+    padding-top: 50px;
+    background-position: center center;
+    background-size: cover;
+  }
+
   .wrap {
     text-align: center;
+    padding-bottom: 300px;
   }
 
   .wrap kbd {
@@ -92,7 +158,15 @@
 </head>
 
 <body>
-  <header></header>
+  <header>
+    <ul class="clearfix">
+      <a class="logo" href="#">Moonlight</a>
+      <div class="wrap-search">
+        <input type="search" name="">
+        <span class="search">百度一下</span><span class="search">谷歌一下</span>
+      </div>
+    </ul>
+  </header>
   <main id="a">
     <div class="wrap">
     </div>
@@ -150,7 +224,7 @@
       var edit = document.createElement("span");
       var del = document.createElement("span");
       var icoSrc = "";
-      if(webLink[key[i][j]]){
+      if (webLink[key[i][j]]) {
         icoSrc = "http://www." + webLink[key[i][j]] + "/favicon.ico";
       }
       edit.setAttribute("class", "btn edit");
