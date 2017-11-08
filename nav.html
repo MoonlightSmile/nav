@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>nav</title>
+  <style type="text/css">
+  .wrap {
+    text-align: center;
+  }
+
+  .wrap kbd {
+    display: inline-block;
+    width: 50px;
+    text-align: center;
+    margin-right: 2px;
+    padding: 17.5px 0;
+    position: relative;
+    margin: 10px;
+    user-select: none;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 0 0 3px 2px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    color: #999;
+    transition: all 0.3s;
+  }
+
+  .wrap kbd .btn.del {
+    top: 3px;
+    left: 3px;
+  }
+
+  .wrap kbd .btn.edit {
+    top: 3px;
+    left: 23px;
+  }
+
+  .wrap kbd .btn {
+    display: block;
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background: #F2BE42;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #fff;
+    display: none;
+  }
+
+  .wrap kbd:hover .btn {
+    display: block;
+  }
+
+  .wrap kbd .btn:hover {
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  .wrap kbd:hover {
+    box-shadow: 0 2px 9px 3px rgba(0, 0, 0, 0.3);
+    position: relative;
+    top: 0;
+    left: 0;
+    animation: 0.2s move forwards;
+  }
+
+  @keyframes move {
+    from {
+      top: 0
+    }
+    to {
+      top: 3px;
+    }
+  }
+
+  .wrap div {}
+
+  .wrap div img {
+    position: absolute;
+    top: 65%;
+    left: 3%;
+    width: 15px;
+    height: 15px;
+    border-radius: 4px;
+    border: none;
+  }
+  </style>
+  <link rel="stylesheet" type="sweetalert-master/src/sweetalert.css" href="dist/sweetalert.css">
+</head>
+
+<body>
+  <header></header>
+  <main id="a">
+    <div class="wrap">
+    </div>
+  </main>
+  <footer></footer>
+  <script src="./sweetalert-master/docs/assets/sweetalert/sweetalert.min.js"></script>
+  <script type="text/javascript">
+  var key = [
+    [1, 2, 3, 4, 5, 6, 7, 8, 9, 0],
+    ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
+    ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
+    ["z", "x", "c", "v", "b", "n", "m"]
+  ]
+  var hash = { 'q': 'qq.com', 'w': 'weibo.com', 'e': 'ele.me', 'r': 'renren.com', 't': 'tianya.com', 'y': 'youtube.com', 'u': 'uc.com', 'i': 'iqiyi.com', 'o': 'opera.com', 'p': undefined, 'a': 'acfun.tv', 's': 'sohu.com', 'z': 'zhihu.com', 'm': 'www.mcdonalds.com.cn', "j": "jingdong.com" }
+  var webLink = {
+    a: "acfun.cn",
+    b: "acfun.com",
+    c: "acfun.com",
+    d: "acfun.com",
+    e: "acfun.com",
+    f: "acfun.com",
+    g: "acfun.com",
+    h: "acfun.com",
+    i: "acfun.com",
+    j: "acfun.com",
+    k: "acfun.com",
+    l: "acfun.com",
+    z: "acfun.com",
+    x: "acfun.com",
+    c: "acfun.com",
+    v: "acfun.com",
+  }
+  var wrap = document.querySelector(".wrap");
+
+  for (var i = 0; i < key.length; i++) {
+    var div = document.createElement("div");
+    wrap.appendChild(div);
+    for (var j = 0; j < key[i].length; j++) {
+      var kbd = document.createElement("kbd");
+      var img = document.createElement("img");
+      var edit = document.createElement("span");
+      var del = document.createElement("span");
+      var icoSrc = "http://www." + hash[key[i][j]] + "/favicon.ico";
+      edit.setAttribute("class", "btn edit");
+      edit.textContent = "E";
+      edit.index = key[i][j];
+      del.setAttribute("class", "btn del");
+      del.textContent = "D";
+      del.inde = key[i][j];
+      img.setAttribute("src", icoSrc)
+      kbd.textContent = key[i][j];
+      kbd.index = key[i][j];
+      edit.addEventListener("click", function(e) {
+        console.log(this.index)
+        swal("请给我一个链接", {
+            content: "input",
+          })
+          .then((value) => {
+            hash[this.index] = value;
+            this.parentNode.querySelector("img").src = "http://www." + hash[this.index] + "/favicon.ico"
+            console.log(value);
+          })
+        e.stopPropagation()
+      })
+      del.addEventListener("click", function(e) {
+        hash[this.index] = "";
+        this.parentNode.querySelector("img").src = ""
+        e.stopPropagation()
+      })
+
+      kbd.addEventListener("click", function(e) {
+        href = hash[this.index] || "";
+        if (!href) return;
+        open("http://www." + hash[this.index], "_blank")
+      })
+
+      kbd.appendChild(img);
+      kbd.appendChild(edit);
+      kbd.appendChild(del);
+      div.appendChild(kbd);
+
+
+    }
+  }
+  document.addEventListener("keyup", function(e) {
+    href = hash[e.key] || "";
+    if (!href) return;
+    console.log(href);
+    open("http://www." + href, "_blank");
+  })
+  </script>
+</body>
+
+</html>
