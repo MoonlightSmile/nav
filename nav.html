@@ -22,7 +22,7 @@
   header {
     text-align: center;
     padding: 29px 40px;
-    background: rgba(0, 0, 0,0.9);
+    background: rgba(0, 0, 0, 0.9);
     box-shadow: 0 2px 9px 3px rgba(0, 0, 0, 0.3);
   }
 
@@ -209,13 +209,11 @@
     y: "",
     z: "zhihu.com"
   }
-
   hashInLocalStorage = JSON.parse(localStorage.getItem('zzz') || 'null')
   if (hashInLocalStorage) {
     webLink = hashInLocalStorage
   }
   var wrap = document.querySelector(".wrap");
-
   for (var i = 0; i < key.length; i++) {
     var div = document.createElement("div");
     wrap.appendChild(div);
@@ -253,19 +251,15 @@
         this.parentNode.querySelector("img").src = "";
         localStorage.setItem('zzz', JSON.stringify(webLink))
       })
-
       kbd.addEventListener("click", function(e) {
         href = webLink[this.index] || "";
         if (!href) return;
         open("http://www." + webLink[this.index], "_blank")
       })
-
       kbd.appendChild(img);
       kbd.appendChild(edit);
       kbd.appendChild(del);
       div.appendChild(kbd);
-
-
     }
   }
   document.addEventListener("keyup", function(e) {
@@ -275,18 +269,17 @@
   })
 
 
-  //搜索功能
+  //*****************搜索功能
   var btns = document.querySelectorAll(".search");
   console.log(btns);
-  btns[0].addEventListener("click", function(){
+  btns[0].addEventListener("click", function() {
     var arguments = document.querySelector(".arguments");
-    open("http://www.baidu.com/s?wd="+arguments.value, "_blank");
+    open("http://www.baidu.com/s?wd=" + arguments.value, "_blank");
   })
-  btns[1].addEventListener("click", function(){
+  btns[1].addEventListener("click", function() {
     var arguments = document.querySelector(".arguments");
-    open("http://www.google.com/search?q="+arguments.value, "_blank")
+    open("http://www.google.com/search?q=" + arguments.value, "_blank")
   })
-
   </script>
 </body>
 
