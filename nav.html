@@ -105,24 +105,38 @@
     ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
     ["z", "x", "c", "v", "b", "n", "m"]
   ]
-  var hash = { 'q': 'qq.com', 'w': 'weibo.com', 'e': 'ele.me', 'r': 'renren.com', 't': 'tianya.com', 'y': 'youtube.com', 'u': 'uc.com', 'i': 'iqiyi.com', 'o': 'opera.com', 'p': "", 'a': 'acfun.tv', 's': 'sohu.com', 'z': 'zhihu.com', 'm': 'www.mcdonalds.com.cn', "j": "jingdong.com" }
   var webLink = {
     a: "acfun.cn",
-    b: "acfun.com",
-    c: "acfun.com",
-    d: "acfun.com",
-    e: "acfun.com",
-    f: "acfun.com",
-    g: "acfun.com",
+    b: "baidu.com",
+    c: "",
+    d: "",
+    e: "",
+    f: "",
+    g: "google.com",
     h: "acfun.com",
     i: "acfun.com",
-    j: "acfun.com",
-    k: "acfun.com",
-    l: "acfun.com",
-    z: "acfun.com",
-    x: "acfun.com",
-    c: "acfun.com",
-    v: "acfun.com",
+    j: "jingdong.com",
+    k: "",
+    l: "",
+    m: "",
+    n: "",
+    o: "",
+    p: "",
+    q: "qq.com",
+    r: "",
+    s: "",
+    t: "",
+    u: "",
+    v: "",
+    w: "weibo.com",
+    x: "",
+    y: "",
+    z: "zhihu.com"
+  }
+
+  hashInLocalStorage = JSON.parse(localStorage.getItem('zzz') || 'null')
+  if (hashInLocalStorage) {
+    webLink = hashInLocalStorage
   }
   var wrap = document.querySelector(".wrap");
 
@@ -134,7 +148,7 @@
       var img = document.createElement("img");
       var edit = document.createElement("span");
       var del = document.createElement("span");
-      var icoSrc = "http://www." + hash[key[i][j]] + "/favicon.ico";
+      var icoSrc = "http://www." + webLink[key[i][j]] + "/favicon.ico";
       edit.setAttribute("class", "btn edit");
       edit.textContent = "E";
       edit.index = key[i][j];
@@ -150,22 +164,22 @@
             content: "input",
           })
           .then((value) => {
-            hash[this.index] = value;
-            this.parentNode.querySelector("img").src = "http://www." + hash[this.index] + "/favicon.ico"
-            console.log(value);
+            webLink[this.index] = value;
+            this.parentNode.querySelector("img").src = "http://www." + webLink[this.index] + "/favicon.ico"
+            localStorage.setItem('zzz', JSON.stringify(webLink))
           })
         e.stopPropagation()
       })
       del.addEventListener("click", function(e) {
-        hash[this.index] = "";
+        webLink[this.index] = "";
         this.parentNode.querySelector("img").src = "";
-        e.stopPropagation();
+        localStorage.setItem('zzz', JSON.stringify(webLink))
       })
 
       kbd.addEventListener("click", function(e) {
-        href = hash[this.index] || "";
+        href = webLink[this.index] || "";
         if (!href) return;
-        open("http://www." + hash[this.index], "_blank")
+        open("http://www." + webLink[this.index], "_blank")
       })
 
       kbd.appendChild(img);
@@ -177,9 +191,8 @@
     }
   }
   document.addEventListener("keyup", function(e) {
- 
-    href = hash[e.key] || "";
-    if (!href||!e.ctrlKey) return;
+    href = webLink[e.key] || "";
+    if (!href || !e.ctrlKey) return;
     console.log(e.ctrlKey)
     console.log(href);
     open("http://www." + href, "_blank");
