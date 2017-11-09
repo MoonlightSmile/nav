@@ -238,7 +238,8 @@
       img.setAttribute("src", icoSrc)
       kbd.textContent = key[i][j];
       kbd.index = key[i][j];
-      kbd.setAttribute("id", key[i][j]);
+      var kbdId = typeof(key[i][j])=="number"?("num"+key[i][j]) : key[i][j];
+      kbd.setAttribute("id", kbdId);
       edit.addEventListener("click", function(e) {
         swal("请给我一个链接", {
             content: "input",
@@ -267,15 +268,16 @@
     }
   }
   document.addEventListener("keydown", function(e) {
-    var thiskbd = document.querySelector("#"+e.key);
+    var idkey=/[0-9]/.test(e.key)?("num"+e.key):e.key;
+    var thiskbd = document.querySelector("#"+idkey);
     thiskbd.style.backgroundColor = 'red';
     href = webLink[e.key] || "";
     if (!href || !e.ctrlKey) return;
     open("http://www." + href, "_blank");
   })
   document.addEventListener("keyup", function(e) {
-    var thiskbd = document.querySelector("#"+e.key);
-    thiskbd.style.backgroundColor = '';
+    var idkey=/[0-9]/.test(e.key)?("num"+e.key):e.key;
+    document.querySelector("#"+idkey).style.backgroundColor = '';
   })
 
   //*****************搜索功能
