@@ -154,8 +154,13 @@
     border-radius: 4px;
     border: none;
   }
+
   .wrap div img[src=""] {
     opacity: 0;
+  }
+
+  .red {
+    background: red;
   }
   </style>
   <link rel="stylesheet" type="sweetalert-master/src/sweetalert.css" href="dist/sweetalert.css">
@@ -238,7 +243,7 @@
       img.setAttribute("src", icoSrc)
       kbd.textContent = key[i][j];
       kbd.index = key[i][j];
-      var kbdId = typeof(key[i][j])=="number"?("num"+key[i][j]) : key[i][j];
+      var kbdId = typeof(key[i][j]) == "number" ? ("num" + key[i][j]) : key[i][j];
       kbd.setAttribute("id", kbdId);
       edit.addEventListener("click", function(e) {
         swal("请给我一个链接", {
@@ -268,16 +273,18 @@
     }
   }
   document.addEventListener("keydown", function(e) {
-    var idkey=/[0-9]/.test(e.key)?("num"+e.key):e.key;
-    var thiskbd = document.querySelector("#"+idkey);
-    thiskbd.style.backgroundColor = 'red';
+    var idkey = /[0-9]/.test(e.key) ? ("num" + e.key) : e.key;
+    if (!/[0-9A-Za-z]/.test(idkey)) return
+    document.querySelector("#" + idkey).classList.add("red");
     href = webLink[e.key] || "";
     if (!href || !e.ctrlKey) return;
     open("http://www." + href, "_blank");
+    document.querySelector("#" + idkey).classList.remove("red");
   })
   document.addEventListener("keyup", function(e) {
-    var idkey=/[0-9]/.test(e.key)?("num"+e.key):e.key;
-    document.querySelector("#"+idkey).style.backgroundColor = '';
+    var idkey = /[0-9]/.test(e.key) ? ("num" + e.key) : e.key;
+    if (!/[0-9A-Za-z]/.test(idkey)) return
+    document.querySelector("#" + idkey).classList.remove("red");
   })
 
   //*****************搜索功能
