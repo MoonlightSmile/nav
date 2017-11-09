@@ -183,6 +183,7 @@
   <footer></footer>
   <script src="./sweetalert-master/docs/assets/sweetalert/sweetalert.min.js"></script>
   <script type="text/javascript">
+  var href;
   var key = [
     [1, 2, 3, 4, 5, 6, 7, 8, 9, 0],
     ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
@@ -192,29 +193,29 @@
   var webLink = {
     a: "acfun.cn",
     b: "baidu.com",
-    c: "",
+    c: "douban.com",
     d: "douban.com",
-    e: "",
-    f: "",
+    e: "douban.com",
+    f: "douban.com",
     g: "google.com",
-    h: "acfun.com",
-    i: "acfun.com",
+    h: "acfun.cn",
+    i: "acfun.cn",
     j: "jingdong.com",
-    k: "",
-    l: "",
-    m: "",
-    n: "",
-    o: "",
-    p: "",
+    k: "google.com",
+    l: "google.com",
+    m: "google.com",
+    n: "google.com",
+    o: "google.com",
+    p: "google.com",
     q: "qq.com",
-    r: "",
-    s: "",
-    t: "",
-    u: "",
-    v: "",
+    r: "zhihu.com",
+    s: "zhihu.com",
+    t: "zhihu.com",
+    u: "zhihu.com",
+    v: "zhihu.com",
     w: "weibo.com",
-    x: "",
-    y: "",
+    x: "zhihu.com",
+    y: "zhihu.com",
     z: "zhihu.com"
   }
   hashInLocalStorage = JSON.parse(localStorage.getItem('zzz') || 'null')
@@ -273,19 +274,30 @@
     }
   }
   document.addEventListener("keydown", function(e) {
-    var idkey = /[0-9]/.test(e.key) ? ("num" + e.key) : e.key;
-    if (!/[0-9A-Za-z]/.test(idkey)) return
-    document.querySelector("#" + idkey).classList.add("red");
-    href = webLink[e.key] || "";
-    if (!href || !e.ctrlKey) return;
-    open("http://www." + href, "_blank");
-    document.querySelector("#" + idkey).classList.remove("red");
+    isAltKey = e.keyCode > 37 && e.keyCode < 91 && e.altKey === true;
+    if (isAltKey) {
+      var thisvalue = String.fromCharCode(e.keyCode).toLowerCase();
+      href = webLink[thisvalue] || "";
+      var idkey = /[0-9]/.test(thisvalue) ? ("num" + thisvalue) : thisvalue;
+      console.log(thisvalue, href, idkey);
+      document.querySelector("#" + idkey).setAttribute("class", "red");
+      if (!href) {
+        return
+      }
+      open("http://www." + href, "_blank");
+      document.querySelector("#" + idkey).classList.remove("red");
+    }
+
   })
   document.addEventListener("keyup", function(e) {
-    var idkey = /[0-9]/.test(e.key) ? ("num" + e.key) : e.key;
-    if (!/[0-9A-Za-z]/.test(idkey)) return
-    document.querySelector("#" + idkey).classList.remove("red");
+    var thisvalue = String.fromCharCode(e.keyCode).toLowerCase();
+    var idkey = /[0-9]/.test(thisvalue) ? ("num" + thisvalue) : thisvalue;
+    if (isAltKey) {
+      document.querySelector("#" + idkey).classList.remove("red");
+    }
+
   })
+
 
   //*****************搜索功能
   var btns = document.querySelectorAll(".search");
