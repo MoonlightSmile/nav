@@ -15,7 +15,7 @@ function config() {
     ["z", "x", "c", "v", "b", "n", "m"]
   ]
   var webLink = {
-    num1: "jingdong.com",
+    num1: "javascript.ruanyifeng.com",
     num2: "jingdong.com",
     num3: "jingdong.com",
     num4: "jingdong.com",
@@ -88,6 +88,34 @@ function creatKbd(key, webLink) {
   }
 }
 
+
+//监听事件
+function listeningAll(){
+    listeningEdit()
+    listeningDel()
+    listeningKbd()
+    $("body").on("keydown", function(e) {
+      if(lock) return;
+      if (isKey(e)) {
+        var thisvalue = String.fromCharCode(e.keyCode).toLowerCase();
+        var idkey = /[0-9]/.test(thisvalue) ? ("num" + thisvalue) : thisvalue;
+        href = webLink[idkey];
+        $("#" + idkey).attr("class", "red");
+        if (!href) {
+          return
+        }
+        open("http://" + href, "_blank");
+        $("#" + idkey).removeClass('red');
+      }
+     }).on('keyup', function(e) {
+      if(lock) return;
+      var thisvalue = String.fromCharCode(e.keyCode).toLowerCase();
+      var idkey = /[0-9]/.test(thisvalue) ? ("num" + thisvalue) : thisvalue;
+      if (isKey(e)) {
+        $("#" + idkey).removeClass("red");
+      }
+      });
+}
 function listeningEdit() {
   $(".btn.edit").on("click", function(event) {
     lock = true;
@@ -123,37 +151,8 @@ function listeningKbd() {
     window.open("http:/"+webLink[$id]);
   })
 }
-
-function listeningAll(){
-    listeningEdit()
-    listeningDel()
-    listeningKbd()
-    $("body").on("keydown", function(e) {
-      if(lock) return;
-      if (isKey(e)) {
-        var thisvalue = String.fromCharCode(e.keyCode).toLowerCase();
-        var idkey = /[0-9]/.test(thisvalue) ? ("num" + thisvalue) : thisvalue;
-        href = webLink[idkey];
-        $("#" + idkey).attr("class", "red");
-        if (!href) {
-          return
-        }
-        open("http://www." + href, "_blank");
-        $("#" + idkey).removeClass('red');
-      }
-     }).on('keyup', function(e) {
-      if(lock) return;
-      var thisvalue = String.fromCharCode(e.keyCode).toLowerCase();
-      var idkey = /[0-9]/.test(thisvalue) ? ("num" + thisvalue) : thisvalue;
-      if (isKey(e)) {
-        $("#" + idkey).removeClass("red");
-      }
-      });
-}
-
 function isKey(e) {
-  return e.keyCode > 37 && e.keyCode < 91 && e.altKey === false && e.ctrlKey === false&&e.shiftKey
-===false;
+  return e.keyCode > 37 && e.keyCode < 91 && e.altKey === false && e.ctrlKey === false&&e.shiftKey === false&&e.metaKey===false;
 }
 
 
