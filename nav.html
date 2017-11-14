@@ -146,13 +146,11 @@
   }
 
   div.wrap {
-    background: rgba(255,255,255,0.8);
+    background: rgba(255, 255, 255, 0.8);
     padding: 20px 0;
-    margin:20px auto;
+    margin: 20px auto;
     border-radius: 30px;
     max-width: 740px;
-
-
   }
 
   .wrap div img {
@@ -171,6 +169,11 @@
 
   .red {
     background: red;
+    box-shadow: 0 2px 9px 3px rgba(0, 0, 0, 0.3);
+    position: relative;
+    top: 0;
+    left: 0;
+    animation: 0.2s move forwards;
   }
   </style>
   <link rel="stylesheet" type="sweetalert-master/src/sweetalert.css" href="dist/sweetalert.css">
@@ -194,7 +197,7 @@
   <script src="./sweetalert-master/docs/assets/sweetalert/sweetalert.min.js"></script>
   <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
   <script src="main.js"></script>
- <!--  <script type="text/javascript">
+  <!--  <script type="text/javascript">
   var href;
   var key = [
     [1, 2, 3, 4, 5, 6, 7, 8, 9, 0],
