@@ -72,11 +72,13 @@
     padding-top: 50px;
     background-position: center center;
     background-size: cover;
+    background: url(mask.jpg);
+    height: 100vh;
   }
 
   .wrap {
     text-align: center;
-    padding-bottom: 300px;
+    margin-bottom: 300px;
   }
 
   .wrap kbd {
@@ -143,7 +145,12 @@
     }
   }
 
-  .wrap div {}
+  div.wrap {
+    background: rgba(255,255,255,0.8);
+    padding: 20px 0;
+    margin:20px 230px;
+    border-radius: 50px;
+  }
 
   .wrap div img {
     position: absolute;
@@ -182,7 +189,9 @@
   </main>
   <footer></footer>
   <script src="./sweetalert-master/docs/assets/sweetalert/sweetalert.min.js"></script>
-  <script type="text/javascript">
+  <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+  <script src="main.js"></script>
+ <!--  <script type="text/javascript">
   var href;
   var key = [
     [1, 2, 3, 4, 5, 6, 7, 8, 9, 0],
@@ -222,6 +231,7 @@
   if (hashInLocalStorage) {
     webLink = hashInLocalStorage
   }
+
   var wrap = document.querySelector(".wrap");
   for (var i = 0; i < key.length; i++) {
     var div = document.createElement("div");
@@ -309,7 +319,7 @@
     var arguments = document.querySelector(".arguments");
     open("http://www.google.com/search?q=" + arguments.value, "_blank")
   })
-  </script>
+  </script> -->
 </body>
 
 </html>
