@@ -4,6 +4,7 @@ var webLink = config.webLink;
 var lock = false;
 creatKbd(key, webLink)
 listeningAll();
+search();
 
 
 //配置
@@ -63,10 +64,11 @@ function config() {
 }
 //获取图标
 function getIco(ele, hash) {
+
   var src = "";
   src = "http://" + hash + "/favicon.ico"
   ele.on('error', function(event) {
-      $(this).attr("src", "https://i.loli.net/2017/11/15/5a0b15f576679.png")
+      $(this).attr("src", "")
   }).attr("src", src);
 }
 //创建键盘
@@ -154,6 +156,22 @@ function listeningKbd() {
 function isKey(e) {
   return e.keyCode > 37 && e.keyCode < 91 && e.altKey === false && e.ctrlKey === false&&e.shiftKey === false&&e.metaKey===false;
 }
+
+function search(){
+  $(".arguments").on('focus', function(event) {
+    lock=true;
+  }).on('blur', function(event) {
+    lock=false;
+  });;
+  $(".search").eq(0).on('click', function(event) {
+    open("http://www.baidu.com/s?wd=" + $('.arguments').val(), "_blank");
+  })
+  $(".search").eq(1).on('click', function(event) {
+    open("http://www.google.com/search?q=" + $('.arguments').val(), "_blank");
+  });
+}
+
+
 
 
 
