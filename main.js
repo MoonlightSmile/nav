@@ -64,11 +64,11 @@ function config() {
 }
 //获取图标
 function getIco(ele, hash) {
-
   var src = "";
   src = "http://" + hash + "/favicon.ico"
   ele.on('error', function(event) {
-      $(this).attr("src", "")
+    $(this).attr("src", "https://i.loli.net/2017/11/15/5a0bf2eb3d95b.png")
+    return
   }).attr("src", src);
 }
 //创建键盘
