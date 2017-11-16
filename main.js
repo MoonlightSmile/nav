@@ -65,7 +65,7 @@ function config() {
 //获取图标
 function getIco(ele, hash) {
   var src = "";
-  src = "//" + hash + "/favicon.ico"
+  src = "https://" + hash + "/favicon.ico"
   ele.on('error', function(event) {
     $(this).attr("src", "https://i.loli.net/2017/11/15/5a0bf2eb3d95b.png")
     return
@@ -106,7 +106,7 @@ function listeningAll() {
       if (!href) {
         return
       }
-      open("//" + href, "_blank");
+      open("https://" + href, "_blank");
       $("#" + idkey).removeClass('red');
     }
   }).on('keyup', function(e) {
@@ -152,7 +152,7 @@ function listeningKbd() {
   $("kbd").on("click", function(event) {
     var $id = $(this).attr("id");
     if (!webLink[$id]) return
-    window.open("//" + webLink[$id]);
+    window.open("https://" + webLink[$id]);
   })
 }
 
