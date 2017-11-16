@@ -65,7 +65,7 @@ function config() {
 //获取图标
 function getIco(ele, hash) {
   var src = "";
-  src = "http://" + hash + "/favicon.ico"
+  src = "//" + hash + "/favicon.ico"
   ele.on('error', function(event) {
     $(this).attr("src", "https://i.loli.net/2017/11/15/5a0bf2eb3d95b.png")
     return
@@ -77,7 +77,7 @@ function creatKbd(key, webLink) {
     var $div = $("<div></div>")
     $(".wrap").append($div)
     for (var j = 0; j < key[i].length; j++) {
-      var content = key[i][j].indexOf("num")>-1 ? (key[i][j].substring(3)) : key[i][j];
+      var content = key[i][j].indexOf("num") > -1 ? (key[i][j].substring(3)) : key[i][j];
       var $kbd = $('<kbd id=' + key[i][j] + '>' + content + '</kbd>')
       var $img = $('<img></img>')
       var $edit = $('<sapn class="btn edit">E<sapn>')
@@ -92,32 +92,33 @@ function creatKbd(key, webLink) {
 
 
 //监听事件
-function listeningAll(){
-    listeningEdit()
-    listeningDel()
-    listeningKbd()
-    $("body").on("keydown", function(e) {
-      if(lock) return;
-      if (isKey(e)) {
-        var thisvalue = String.fromCharCode(e.keyCode).toLowerCase();
-        var idkey = /[0-9]/.test(thisvalue) ? ("num" + thisvalue) : thisvalue;
-        href = webLink[idkey];
-        $("#" + idkey).attr("class", "red");
-        if (!href) {
-          return
-        }
-        open("http://" + href, "_blank");
-        $("#" + idkey).removeClass('red');
-      }
-     }).on('keyup', function(e) {
-      if(lock) return;
+function listeningAll() {
+  listeningEdit()
+  listeningDel()
+  listeningKbd()
+  $("body").on("keydown", function(e) {
+    if (lock) return;
+    if (isKey(e)) {
       var thisvalue = String.fromCharCode(e.keyCode).toLowerCase();
       var idkey = /[0-9]/.test(thisvalue) ? ("num" + thisvalue) : thisvalue;
-      if (isKey(e)) {
-        $("#" + idkey).removeClass("red");
+      href = webLink[idkey];
+      $("#" + idkey).attr("class", "red");
+      if (!href) {
+        return
       }
-      });
+      open("//" + href, "_blank");
+      $("#" + idkey).removeClass('red');
+    }
+  }).on('keyup', function(e) {
+    if (lock) return;
+    var thisvalue = String.fromCharCode(e.keyCode).toLowerCase();
+    var idkey = /[0-9]/.test(thisvalue) ? ("num" + thisvalue) : thisvalue;
+    if (isKey(e)) {
+      $("#" + idkey).removeClass("red");
+    }
+  });
 }
+
 function listeningEdit() {
   $(".btn.edit").on("click", function(event) {
     lock = true;
@@ -126,9 +127,10 @@ function listeningEdit() {
     event.stopPropagation()
     swal("请给我一个链接", {
       content: "input",
-    }).then(function(value){
+    }).then(function(value) {
+      if (!value) { swal("你需要输点什么！"); return}
       webLink[$parentId] = value;
-      getIco($img,webLink[$parentId])
+      getIco($img, webLink[$parentId])
       localStorage.setItem('zzz', JSON.stringify(webLink))
       lock = false;
     })
@@ -141,7 +143,7 @@ function listeningDel() {
     var $parentId = $(this).parent("kbd").attr("id");
     var $img = $(this).parent("kbd").find('img')
     webLink[$parentId] = "";
-    getIco($img,webLink[$parentId])
+    getIco($img, webLink[$parentId])
     localStorage.setItem('zzz', JSON.stringify(webLink))
   })
 }
@@ -149,31 +151,25 @@ function listeningDel() {
 function listeningKbd() {
   $("kbd").on("click", function(event) {
     var $id = $(this).attr("id");
-    if(!webLink[$id]) return
-    window.open("http:/"+webLink[$id]);
+    if (!webLink[$id]) return
+    window.open("//" + webLink[$id]);
   })
 }
+
 function isKey(e) {
-  return e.keyCode > 37 && e.keyCode < 91 && e.altKey === false && e.ctrlKey === false&&e.shiftKey === false&&e.metaKey===false;
+  return e.keyCode > 37 && e.keyCode < 91 && e.altKey === false && e.ctrlKey === false && e.shiftKey === false && e.metaKey === false;
 }
 
-function search(){
+function search() {
   $(".arguments").on('focus', function(event) {
-    lock=true;
+    lock = true;
   }).on('blur', function(event) {
-    lock=false;
+    lock = false;
   });;
   $(".search").eq(0).on('click', function(event) {
-    open("http://www.baidu.com/s?wd=" + $('.arguments').val(), "_blank");
+    open("//www.baidu.com/s?wd=" + $('.arguments').val(), "_blank");
   })
   $(".search").eq(1).on('click', function(event) {
-    open("http://www.google.com/search?q=" + $('.arguments').val(), "_blank");
+    open("//www.google.com/search?q=" + $('.arguments').val(), "_blank");
   });
 }
-
-
-
-
-
-
-
