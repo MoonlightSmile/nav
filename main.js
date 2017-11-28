@@ -128,7 +128,7 @@ function listeningEdit() {
     swal("请给我一个链接", {
       content: "input",
     }).then(function(value) {
-      if (!value) { swal("你需要输点什么！"); return}
+      if (!value) { swal("你需要输点什么！"); return }
       webLink[$parentId] = value;
       getIco($img, webLink[$parentId])
       localStorage.setItem('zzz', JSON.stringify(webLink))
@@ -165,6 +165,12 @@ function search() {
     lock = true;
   }).on('blur', function(event) {
     lock = false;
+  }).on("keypress", function(e) {
+    if (e.keyCode === 13 && e.altKey === true) {
+      open("//www.baidu.com/s?wd=" + $('.arguments').val(), "_blank");
+    } else if (e.keyCode === 13) {
+      open("//www.google.com/search?q=" + $('.arguments').val(), "_blank");
+    }
   });;
   $(".search").eq(0).on('click', function(event) {
     open("//www.baidu.com/s?wd=" + $('.arguments').val(), "_blank");
