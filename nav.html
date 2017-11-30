@@ -71,9 +71,11 @@
   main {
     padding-top: 150px;
     background-position: center center;
-    background-size: cover;
-    background: #fff url(mask.jpg);
-    height: 71vh;
+    background-size: auto 100%;
+    background-position: center 0;
+    background-image: url(mask.jpg);
+    height: 100vh;
+    background-repeat: no-repeat;
   }
 
   .wrap {
@@ -184,7 +186,7 @@
     <ul class="clearfix">
       <a class="logo" href="#">Moonlight</a>
       <div class="wrap-search">
-            <input type="search" class="arguments">
+        <input type="search" class="arguments">
         <span class="search baidu">百度一下</span><span class="search google">谷歌一下</span>
       </div>
     </ul>
