@@ -98,6 +98,11 @@ function listeningAll() {
   listeningKbd()
   $("body").on("keydown", function(e) {
     if (lock) return;
+          console.log(e)
+    if (e.keyCode === 83 && e.altKey === true) {
+      $(".arguments").focus();
+      return
+    }
     if (isKey(e)) {
       var thisvalue = String.fromCharCode(e.keyCode).toLowerCase();
       var idkey = /[0-9]/.test(thisvalue) ? ("num" + thisvalue) : thisvalue;
