@@ -19,7 +19,15 @@
     clear: both;
   }
 
+  html {
+    background-size: auto 100%;
+    background-position: center 0;
+    background-image: url(mask.jpg);
+    background-repeat: no-repeat;
+  }
+
   header {
+    min-width: 780px;
     position: fixed;
     left: 0;
     right: 0;
@@ -72,12 +80,10 @@
   }
 
   main {
-    padding-top: 20%;
-    background-size: auto 100%;
-    background-position: center 0;
-    background-image: url(mask.jpg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 100vh;
-    background-repeat: no-repeat;
     box-sizing: border-box;
   }
 
@@ -151,10 +157,11 @@
 
   div.wrap {
     background: rgba(255, 255, 255, 0.8);
-    padding: 20px 0;
+    padding: 20px 20px;
     margin: 0 auto;
     border-radius: 30px;
-    max-width: 740px;
+    min-width: 740px;
+    min-height: 280px;
   }
 
   .wrap div img {
