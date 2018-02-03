@@ -66,7 +66,7 @@ function config() {
 function getIco(ele, hash) {
   const errorSrc = `https://i.loli.net/2017/11/15/5a0bf2eb3d95b.png`
   if (hash) {
-    const src = `//${hash}/favicon.ico`
+    const src = `http://${hash}/favicon.ico`
     ele.attr("src", src)
       .on('error', function(event) {
         $(this).attr("src", errorSrc)
