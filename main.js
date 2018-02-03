@@ -64,12 +64,17 @@ function config() {
 }
 //获取图标
 function getIco(ele, hash) {
-  var src = "";
-  src = "http://" + hash + "/favicon.ico"
-  ele.on('error', function(event) {
-    $(this).attr("src", "https://i.loli.net/2017/11/15/5a0bf2eb3d95b.png")
-    return
-  }).attr("src", src);
+  const errorSrc = `https://i.loli.net/2017/11/15/5a0bf2eb3d95b.png`
+  if (hash) {
+    const src = `http://${hash}/favicon.ico`
+    ele.attr("src", src)
+      .on('error', function(event) {
+        $(this).attr("src", errorSrc)
+        throw "图标获取失败"
+      })
+  } else {
+    ele.attr("src", errorSrc)
+  }
 }
 //创建键盘
 function creatKbd(key, webLink) {
@@ -98,7 +103,6 @@ function listeningAll() {
   listeningKbd()
   $("body").on("keydown", function(e) {
     if (lock) return;
-          console.log(e)
     if (e.keyCode === 83 && e.altKey === true) {
       $(".arguments").focus();
       return
@@ -157,7 +161,7 @@ function listeningKbd() {
   $("kbd").on("click", function(event) {
     var $id = $(this).attr("id");
     if (!webLink[$id]) return
-    window.open("http://" + webLink[$id]);
+    window.open("//" + webLink[$id]);
   })
 }
 
